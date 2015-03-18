@@ -1,0 +1,163 @@
+﻿content{
+    width: 800px;
+    margin:20px auto 0 auto ;
+    display:block;
+}
+
+.name_col{
+    width:320px;
+}
+
+.price_col{
+    width:140px;
+}
+
+.action_menu form{
+    width: 400px;
+    display:inline-block;
+}
+
+.form-control{
+    width:310px;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.action_menu .btn{
+    float:right;
+}
+
+th,td{
+    text-align:center;
+}
+
+.table > tbody > tr > td{
+    vertical-align:middle;
+}
+
+td.name div:first-child{
+    display:inline-block;
+    float: left;
+}
+
+.count{
+    border-radius:20px;
+    background-color:#aaaaaa;
+    color:#fff;
+    float:right;
+    padding:0 5px;
+}
+
+td .btn{
+    margin:0 20px;
+    width:100px;
+    background-color:#ff4f4f;
+}
+
+#modal_form {
+	width: 500px; 
+	height: 700px; /* Размеры должны быть фиксированы */
+	border-radius: 5px;
+	border: 3px #000 solid;
+	background: #fff;
+	position: fixed; /* чтобы окно было в видимой зоне в любом месте */
+	top: 50%; /* отступаем сверху 45%, остальные 5% подвинет скрипт */
+	left: 50%; /* половина экрана слева */
+    margin-left:-250px;
+    margin-top:-350px;/* тут вся магия центровки css, отступаем влево и вверх минус половину ширины и высоты соответственно =) */
+	display: block; /* в обычном состоянии окна не должно быть */
+	opacity: 1; /* полностью прозрачно для анимирования */
+	z-index: 5; /* окно должно быть наиболее большем слое */
+	padding: 20px 20px;
+}
+/* Подложка */
+#overlay {
+	z-index: 3; /* подложка должна быть выше слоев элементов сайта, но ниже слоя модального окна */
+	position: fixed; /* всегда перекрывает весь сайт */
+	background-color: #000; /* черная */
+	opacity: 0.8; /* но немного прозрачна */
+	width: 100%; 
+	height: 100%; /* размером во весь экран */
+	top: 0; 
+	left: 0; /* сверху и слева 0, обязательные свойства! */
+	cursor: pointer;
+	display: none; /* в обычном состоянии её нет) */
+}
+
+.form-group label{
+    display:block;
+}
+
+.modal_form .form-group{
+    margin-top:20px;
+}
+
+.form-group input{
+    width:230px;
+}
+
+.count_input input{
+    width:80px;
+}
+
+.price input{
+    width:120px;
+}
+
+.delivery{
+    margin: 20px 0;
+}
+
+.delivery_item .checkbox:first-child{
+    border-bottom:1px #8e8d8d solid;
+    margin-bottom:15px;
+}
+
+.center {
+    border-left:1px #8e8d8d solid;
+    border-right:1px #8e8d8d solid;
+}
+
+.delivery_item {
+    width: 140px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px #000 solid;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    height:140px;
+}
+
+.delivery_title{
+    font-weight: bold;
+}
+.delivery_item select{
+    width:100px;
+    margin-top:10px;
+}
+
+.items .delivery_item:first-child{
+    float:left;
+    border:none;
+    padding:10px 0;
+}
+
+.close{
+    position:absolute;
+    right:10px;
+    top: 10px;
+}
+
+.line{
+    height:140px;
+    width:1px;
+    background-color:#8e8d8d;
+    display:inline-block;
+    margin:0 5px;
+}
+
+th span{
+    float:right;
+}

@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Table Sorting</title>
+    <meta charset="utf-8" />
+    <link href="styles/reset_css.css" rel="stylesheet" />
+    <link href="styles/bootstrap.css" rel="stylesheet" />
+    <link href="styles/mystyle.css" rel="stylesheet" />
+</head>
+<body>
+    <content>
+        <div class="action_menu">
+            <form action="#" method="post" name="search">
+                <div class="form-group">
+                    <input type="text" placeholder="Фильтр" class="form-control" />
+                    <button type="submit" class="btn btn-default">Искать</button>
+                </div>
+            </form>
+            <a href="#" class="btn btn-default ">Add New</a>
+        </div>
+        <table class="table table-bordered table-hover" id="table1">
+            <thead>
+                <tr>
+                    <th class="name_col">Name <span class="glyphicon glyphicon-triangle-top"></span></th>
+                    <th class="price_col">Price</th>
+                    <th class="actions_col">Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </content>
+
+
+    <div class="modal_form" id="modal_form">
+
+        </div>
+    <div class="overlay" id="overlay"></div>
+
+
+
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/jquery-2.1.3.js"></script>
+    <script src="scripts/lodash.js"></script>
+    <script src="scripts/fake-data.js"></script>
+    <script src="scripts/script.js"></script>
+
+
+    <script id="EditTemplate" type="text/html">
+
+        <%= productInfoTemplateFunc({ product: product }) %>
+
+    </script>
+
+    <script id="modalTemplate" type="text/html">
+
+        <div class="close">x</div>
+
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите имя" value="<%= product.name %>" />
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Supplier Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<%= product.email %>">
+            </div>
+            <div class="form-group count_input">
+                <label for="exampleInputEmail1">Count</label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="<%= product.count %>">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Price</label>
+                <input class="form-control" id="exampleInputEmail1" placeholder="<%= product.price %>">
+            </div>
+
+            <div class="delivery">
+                <div class="delivery_title">
+            Delivery:
+                </div>
+                <div class="items">
+                <div class="delivery_item">
+                    <select class="form-control">
+                        <option>Старна</option>
+                        <option>Город</option>
+                    </select>
+                </div>
+                    <div class="line"></div>
+                <div class="delivery_item center">
+
+                    <% _.each(delivery, function(i) { %>  
+                    <div class="radio">
+                        <label>
+                    <% if(product.country == i.country) {%>
+                            <input type="radio" name="optionsRadios" id="Radio1" value="option1" checked />
+                            <% i.country %>
+                            <% } else {%>
+                            <input type="radio" name="optionsRadios" id="Radio2" value="option1" />
+                            <% i.country %>
+                    <% }); %>
+                        </label>
+                    </div>
+                    
+                    </div>
+                    <div class="line"></div>
+                <div class="delivery_item">
+                    <div class="checkbox">
+                       <% var del = delivery.indexOf(product.country)
+                        <label>
+                            <% if(product.city.length == delivery[del].length) {%>
+                            <input type="checkbox" value="" checked />
+                            <% } else {%>
+                            <input type="checkbox" value="" />
+                            <% } %>
+                            Select All
+                        </label>
+                    </div>
+
+                    <% _.each(delivery[del], function(i) { %>
+                    <div class="checkbox">
+                        <label>
+                            <% if( product.city.indexOf(i)>0) {%>
+                            <input type="checkbox" value="<%i%>" checked />
+                            <%i%>
+                            <% } else {%>
+                            <input type="checkbox" value="<%i%>" />
+                            <%i%>
+                        </label>
+                    </div>
+                </div>
+                </div>
+                </div>
+            <button class="btn btn-default " type="submit">Add/Update</button>
+        </form>
+
+    </script>
+
+
+
+
+    <!--Шаблон-->
+
+    <script id="tbodyTemplate" type="text/html">
+        <thead>
+            <tr>
+                <th class="name_col">Name <a><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
+                <th class="price_col">Price</th>
+                <th class="actions_col">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="productList">
+            <% _.each(products, function(product) { %>
+
+            <!-- Рендерим в цикле товары -->
+            <%= productRowTemplateFunc({ product: product }) %>
+
+            <% }); %>
+        </tbody>
+
+    </script>
+
+
+    <script id="productRowTemplate" type="text/html">
+
+        <tr data-personid="<%= product.id %>">
+            <td class="name"><div><a id="<%- product.id %>"><%- product.name %></a></div> <div class="count"><%- product.count %></div></td>
+            <td><%- product.price %></td>
+            <td><a class="btn btn-default">Edit</a><a class="btn btn-default">Delete</a></td>
+        </tr>
+
+    </script>
+
+
+    <script>
+
+
+        $(function () {
+            var productRowHtml = $('#productRowTemplate').html(),
+                productRowTemplateFunc = _.template(productRowHtml), // функция шаблонизатор
+                tbodyHtml = $('#tbodyTemplate').html(),
+                tbodyTemplateFunc = _.template(tbodyHtml);
+
+            function generateProductHtml(product) {
+                // наполняем шаблон объектом
+                return productRowTemplateFunc({ product: product });
+            }
+
+            // Fill list with server data
+            function renderTable(products) {
+                var tbodyHtml = tbodyTemplateFunc({
+                    products: products,
+                    productRowTemplateFunc: productRowTemplateFunc
+                });
+                $('#table1').html(tbodyHtml);
+
+            }
+            renderTable(products);
+
+        });
+
+
+
+        $(document).on('click', '.name a', function () {
+
+            var id = $(this).attr('id');
+            var result = $.grep(products, function (e) { return e.id == id; });
+            console.log(result);
+
+
+            var productInfoHtml = $('#modalTemplate').html(),
+            productInfoTemplateFunc = _.template(productInfoHtml),// функция шаблонизатор
+            modalHtml = $('#modalHtml').html(),
+            modalTemplateFunc = _.template(modalHtml);
+
+
+            function generateProductInfoHtml(product) {
+                // наполняем шаблон объектом
+                return productInfoTemplateFunc({
+                    product: product,
+                });
+            }
+
+            function renderModal(product) {
+                var modalHtml = modalTemplateFunc({
+                    product: product,
+                    productInfoTemplateFunc: productInfoTemplateFunc
+                });
+                $('#modal_form').html(productInfoHtml);
+            }
+
+            renderModal(result);
+        });
+
+    </script>
+
+
+
+</body>
+</html>
