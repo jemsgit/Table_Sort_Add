@@ -65,11 +65,39 @@ td .btn{
 	left: 50%; /* половина экрана слева */
     margin-left:-250px;
     margin-top:-350px;/* тут вся магия центровки css, отступаем влево и вверх минус половину ширины и высоты соответственно =) */
-	display: block; /* в обычном состоянии окна не должно быть */
+	display: none; /* в обычном состоянии окна не должно быть */
 	opacity: 1; /* полностью прозрачно для анимирования */
 	z-index: 5; /* окно должно быть наиболее большем слое */
 	padding: 20px 20px;
 }
+
+#modal_delete{
+    width: 300px; 
+	height: 100px; /* Размеры должны быть фиксированы */
+	border-radius: 5px;
+	border: 3px #000 solid;
+	background: #fff;
+	position: fixed; /* чтобы окно было в видимой зоне в любом месте */
+	top: 50%; /* отступаем сверху 45%, остальные 5% подвинет скрипт */
+	left: 50%; /* половина экрана слева */
+    margin-left:-150px;
+    margin-top:-100px;/* тут вся магия центровки css, отступаем влево и вверх минус половину ширины и высоты соответственно =) */
+	display: none; /* в обычном состоянии окна не должно быть */
+	opacity: 1; /* полностью прозрачно для анимирования */
+	z-index: 5; /* окно должно быть наиболее большем слое */
+	padding: 10px 20px;
+    text-align: center;
+}
+
+.title{
+    border-bottom:1px solid #aaaaaa;
+    font-weight: bold;
+}
+
+.modal_delete button{
+    margin:10px 20px;
+}
+
 /* Подложка */
 #overlay {
 	z-index: 3; /* подложка должна быть выше слоев элементов сайта, но ниже слоя модального окна */
@@ -106,6 +134,7 @@ td .btn{
 
 .delivery{
     margin: 20px 0;
+    height:170px;
 }
 
 .delivery_item .checkbox:first-child{
@@ -120,7 +149,6 @@ td .btn{
 
 .delivery_item {
     width: 140px;
-    display: inline-block;
     vertical-align: top;
     border: 1px #000 solid;
     -moz-border-radius: 5px;
@@ -128,6 +156,19 @@ td .btn{
     border-radius: 5px;
     padding: 10px;
     height:140px;
+}
+
+.delivery_module{
+    display:none;
+    opacity:0;
+}
+
+.delivery_item, .line {
+    display:inline-block;
+}
+
+.items .delivery_item :first-child{
+    display:inline-block;
 }
 
 .delivery_title{
@@ -160,4 +201,22 @@ td .btn{
 
 th span{
     float:right;
+}
+
+.validation_result{
+    color:#fe0505;
+    display:inline-block;
+    width:200px;
+    vertical-align:middle;
+}
+
+.validation_result img{
+    display: none;
+    opacity: 1;
+}
+
+.novalid {
+    -moz-box-shadow: 0 0 8px #f00;
+    -webkit-box-shadow: 0 0 8px #f00;
+    box-shadow: 0 0 8px #f00;
 }

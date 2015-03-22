@@ -1,93 +1,84 @@
 ﻿var products = [{
-    id:1234,
+    id:1,
     name: "Product1",
     email: "narkotiki@mail.ru",
     count: 5,
-    price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов","Москва","Питер"]
+    price: 445,
+    country: 1,
+    city: [1]
 },
 {
-    id: 1236,
-    name: "Product1",
+    id: 2,
+    name: "Product2",
     email: "narkotiki@mail.ru",
-    count: 5,
-    price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    count: 0,
+    price: 432445,
+    country: 2,
+    city: [1, 2, 3]
 },
 {
-    id: 1238,
-    name: "Product1",
+    id: 3,
+    name: "Product3",
     email: "narkotiki@mail.ru",
-    count: 5,
-    price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    count: 25,
+    price: 3245,
+    country: 3,
+    city: [1, 3]
 },
 {
-    id: 144,
-    name: "Product1",
+    id: 4,
+    name: "Asfdfsd",
     email: "narkotiki@mail.ru",
-    count: 5,
+    count: 8,
     price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    country: 1,
+    city: [1, 2, 3]
 },
 {
-    id: 12444,
-    name: "Product1",
+    id: 5,
+    name: "Prod",
     email: "narkotiki@mail.ru",
-    count: 5,
-    price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    count: 26,
+    price: 4243545,
+    country: 1,
+    city: [1, 2, 3]
 },
 {
-    id: 13234,
-    name: "Product1",
+    id: 6,
+    name: "Srtrduct1",
     email: "narkotiki@mail.ru",
     count: 5,
-    price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    price: 42565,
+    country: 1,
+    city: [1, 2, 3]
 },
 {
-    id: 22334,
-    name: "Product1",
+    id: 7,
+    name: "Adfsd1",
     email: "narkotiki@mail.ru",
     count: 5,
     price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    country: 1,
+    city: [1, 2, 3]
 },
 {
-    id: 3734,
+    id: 8,
     name: "Product1",
     email: "narkotiki@mail.ru",
-    count: 5,
+    count: 164,
     price: 42345,
-    delivery: ["Страна", "Город"],
-    country: "Россия",
-    city: ["Саратов", "Москва", "Питер"]
+    country: 2,
+    city: [1, 2, 3]
 }];
 
-var delivery = [{
-    country: "Россия",
-    cities: ["Саратов", "Питер", "Москва"]
-},
-{
-    country: "США",
-    cities: ["LA", "NY", "Springfield"]
-},
-{
-    country: "Япония",
-    cities: ["Токио", "Акита", "Тояма"]
-}];
+countrylist = [
+    { id: 1, name: 'Россия' },
+    { id: 2, name: 'США' },
+    { id: 3, name: 'Япония' }
+]
+
+citylist = [
+    { id: 1, name: 'Саратов' },
+    { id: 2, name: 'Москва' },
+    { id: 3, name: 'Питер' }
+]

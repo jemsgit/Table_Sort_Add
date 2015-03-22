@@ -12,137 +12,147 @@
         <div class="action_menu">
             <form action="#" method="post" name="search">
                 <div class="form-group">
-                    <input type="text" placeholder="Фильтр" class="form-control" />
-                    <button type="submit" class="btn btn-default">Искать</button>
+                    <input type="text" placeholder="Фильтр" class="form-control" id="search_input" />
+                    <button type="submit" class="btn btn-default" id="search">Искать</button>
                 </div>
             </form>
-            <a href="#" class="btn btn-default ">Add New</a>
+            <a href="#" class="btn btn-default " id="add">Add New</a>
         </div>
         <table class="table table-bordered table-hover" id="table1">
             <thead>
                 <tr>
-                    <th class="name_col">Name <span class="glyphicon glyphicon-triangle-top"></span></th>
-                    <th class="price_col">Price</th>
+                    <th class="name_col" id="name">Name</th>
+                    <th class="price_col" id="price">Price</th>
                     <th class="actions_col">Actions</th>
                 </tr>
             </thead>
         </table>
     </content>
 
-
-    <div class="modal_form" id="modal_form">
-
+    <div class="modal_form" id="modal_form"></div>
+    <div class="modal_delete" id="modal_delete">
+        <div class="title">
+            Are you shure?
         </div>
+        <div class="buttons">
+            <button type="submit" class="btn btn-default" id="delete" data-id="">Удалить</button>
+            <button type="reset" class="btn btn-default" id="cancel">Отмена</button>
+        </div>
+    </div>
     <div class="overlay" id="overlay"></div>
 
-
-
-    <script src="scripts/bootstrap.js"></script>
-    <script src="scripts/jquery-2.1.3.js"></script>
-    <script src="scripts/lodash.js"></script>
     <script src="scripts/fake-data.js"></script>
-    <script src="scripts/script.js"></script>
+    <script src="scripts/jquery-2.1.3.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/lodash.js"></script>
 
 
-    <script id="EditTemplate" type="text/html">
 
-        <%= productInfoTemplateFunc({ product: product }) %>
-
-    </script>
-
+    <!--Шаблоны-->
     <script id="modalTemplate" type="text/html">
 
         <div class="close">x</div>
 
         <form action="#" method="post">
             <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Введите имя" value="<%= product.name %>" />
+                <label for="InputName">Name</label>
+                <input type="text" class="form-control" id="InputName" placeholder="Введите название" value="<%= product.name %>" />
+                <div class="validation_result" id="NameValid"><img src="img/valid.png" alt ="valid" width ="20px" /></div>
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Supplier Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<%= product.email %>">
+                <label for="InputEmail">Supplier Email</label>
+                <input type="email" class="form-control" id="InputEmail" placeholder="Введите E-mail" value="<%= product.email %>">
+                <div class="validation_result" id="EmailValid"><img src="img/valid.png" alt ="valid" width ="20px" /></div>
             </div>
             <div class="form-group count_input">
-                <label for="exampleInputEmail1">Count</label>
-                <input class="form-control" id="exampleInputEmail1" placeholder="<%= product.count %>">
+                <label for="InputCount">Count</label>
+                <input class="form-control" id="InputCount" placeholder="Кол-во" value="<%= product.count %>">
+                <div class="validation_result" id="CountValid"><img src="img/valid.png" alt ="valid" width ="20px" /></div>
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Price</label>
-                <input class="form-control" id="exampleInputEmail1" placeholder="<%= product.price %>">
+                <label for="InputPrice">Price</label>
+                <input class="form-control" id="InputPrice" placeholder="Цена" value="<%= product.price %>">
+                <div class="validation_result" id="PriceValid"><img src="img/valid.png" alt ="valid" width ="20px" /></div>
             </div>
-
+            
             <div class="delivery">
                 <div class="delivery_title">
-            Delivery:
+                    Delivery:
                 </div>
                 <div class="items">
-                <div class="delivery_item">
-                    <select class="form-control">
-                        <option>Старна</option>
-                        <option>Город</option>
-                    </select>
-                </div>
+                    <div class="delivery_item">
+                        <select class="form-control" id="delivery">
+                            <option></option>
+                            <option>Страна</option>
+                            <option>Город</option>
+                        </select>
+                    </div>
+                    <div class="delivery_module" id="country">
                     <div class="line"></div>
-                <div class="delivery_item center">
-
-                    <% _.each(delivery, function(i) { %>  
-                    <div class="radio">
-                        <label>
-                    <% if(product.country == i.country) {%>
-                            <input type="radio" name="optionsRadios" id="Radio1" value="option1" checked />
-                            <% i.country %>
-                            <% } else {%>
-                            <input type="radio" name="optionsRadios" id="Radio2" value="option1" />
-                            <% i.country %>
-                    <% }); %>
-                        </label>
+                    <div class="delivery_item center">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="Radio1" value="1" <% if(product.country == 1) { %> checked <% } %> />
+                                 Россия
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="Radio2" value="2" <% if(product.country == 2) { %> checked <% } %> />
+                                США
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="Radio3" value="3" <% if(product.country == 3) { %> checked <% } %> />
+                                Япония
+                            </label>
+                        </div>
                     </div>
-                    
-                    </div>
+                        </div>
+                    <div class="delivery_module" id="city">
                     <div class="line"></div>
-                <div class="delivery_item">
-                    <div class="checkbox">
-                       <% var del = delivery.indexOf(product.country)
-                        <label>
-                            <% if(product.city.length == delivery[del].length) {%>
-                            <input type="checkbox" value="" checked />
-                            <% } else {%>
-                            <input type="checkbox" value="" />
-                            <% } %>
-                            Select All
-                        </label>
-                    </div>
+                    <div class="delivery_item">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="checkCity" id="check_all" value="check_123" <% if(product.city.length == 3) { %>  checked  <% } %>  />
+                                Select All
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="checkCity" id="check_1" value="1" <% if(product.city.indexOf(1)!= -1) { %>  checked  <% } %>  />
+                                Саратов
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="checkCity" id="check_2" value="2" <% if(product.city.indexOf(2)!= -1) { %>  checked  <% } %>  />
+                                Москва
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="checkCity" id="check_3" value="3" <% if(product.city.indexOf(3)!= -1) { %>  checked  <% } %>  />
+                                Питер
+                            </label>
+                        </div>
 
-                    <% _.each(delivery[del], function(i) { %>
-                    <div class="checkbox">
-                        <label>
-                            <% if( product.city.indexOf(i)>0) {%>
-                            <input type="checkbox" value="<%i%>" checked />
-                            <%i%>
-                            <% } else {%>
-                            <input type="checkbox" value="<%i%>" />
-                            <%i%>
-                        </label>
                     </div>
+                        </div>
                 </div>
-                </div>
-                </div>
-            <button class="btn btn-default " type="submit">Add/Update</button>
+            </div>
+            <button class="btn btn-default " type="submit" id="save">Add/Update</button>
         </form>
 
+
     </script>
-
-
-
-
-    <!--Шаблон-->
 
     <script id="tbodyTemplate" type="text/html">
         <thead>
             <tr>
-                <th class="name_col">Name <a><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></th>
-                <th class="price_col">Price</th>
+                <th class="name_col" id="name">Name<span id="span_sort" class="glyphicon glyphicon-triangle-top"></span></th>
+                <th class="price_col" id="price">Price<span id="span1" class="glyphicon glyphicon-triangle-top"></span></th>
                 <th class="actions_col">Actions</th>
             </tr>
         </thead>
@@ -154,84 +164,17 @@
 
             <% }); %>
         </tbody>
-
     </script>
-
 
     <script id="productRowTemplate" type="text/html">
-
-        <tr data-personid="<%= product.id %>">
-            <td class="name"><div><a id="<%- product.id %>"><%- product.name %></a></div> <div class="count"><%- product.count %></div></td>
+        <tr data-id="<%- product.id %>">
+            <td class="name"><div><a><%- product.name %></a></div> <div class="count"><%- product.count %></div></td>
             <td><%- product.price %></td>
-            <td><a class="btn btn-default">Edit</a><a class="btn btn-default">Delete</a></td>
+            <td><a class="btn btn-default edit">Edit</a><a class="btn btn-default delete">Delete</a></td>
         </tr>
-
     </script>
 
-
-    <script>
-
-
-        $(function () {
-            var productRowHtml = $('#productRowTemplate').html(),
-                productRowTemplateFunc = _.template(productRowHtml), // функция шаблонизатор
-                tbodyHtml = $('#tbodyTemplate').html(),
-                tbodyTemplateFunc = _.template(tbodyHtml);
-
-            function generateProductHtml(product) {
-                // наполняем шаблон объектом
-                return productRowTemplateFunc({ product: product });
-            }
-
-            // Fill list with server data
-            function renderTable(products) {
-                var tbodyHtml = tbodyTemplateFunc({
-                    products: products,
-                    productRowTemplateFunc: productRowTemplateFunc
-                });
-                $('#table1').html(tbodyHtml);
-
-            }
-            renderTable(products);
-
-        });
-
-
-
-        $(document).on('click', '.name a', function () {
-
-            var id = $(this).attr('id');
-            var result = $.grep(products, function (e) { return e.id == id; });
-            console.log(result);
-
-
-            var productInfoHtml = $('#modalTemplate').html(),
-            productInfoTemplateFunc = _.template(productInfoHtml),// функция шаблонизатор
-            modalHtml = $('#modalHtml').html(),
-            modalTemplateFunc = _.template(modalHtml);
-
-
-            function generateProductInfoHtml(product) {
-                // наполняем шаблон объектом
-                return productInfoTemplateFunc({
-                    product: product,
-                });
-            }
-
-            function renderModal(product) {
-                var modalHtml = modalTemplateFunc({
-                    product: product,
-                    productInfoTemplateFunc: productInfoTemplateFunc
-                });
-                $('#modal_form').html(productInfoHtml);
-            }
-
-            renderModal(result);
-        });
-
-    </script>
-
-
+    <script src="scripts/templates.js"></script>
 
 </body>
 </html>
